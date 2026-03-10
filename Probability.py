@@ -42,7 +42,7 @@ def aggregate_by_mass(sequence, N, n):
     for i in range(1, N):
         label = f"b{i}"
         seq = sequence[:i]
-        mass = round(sum(AA_MASS[aa] for aa in seq) + 1.00727, 5)
+        mass = round(sum(AA_MASS[aa] for aa in seq) + 1.00727*2, 5)
         count = b_ion_prob(N, n, i) * num_simulation
         b_ions.append((label, seq, mass, count))
 
@@ -50,7 +50,7 @@ def aggregate_by_mass(sequence, N, n):
     for i in range(1, N):
         label = f"y{i}"
         seq = sequence[-i:]
-        mass = round(sum(AA_MASS[aa] for aa in seq) + 18.01560, 5)
+        mass = round(sum(AA_MASS[aa] for aa in seq) + 18.01560 + 1.00727, 5)
         count = y_ion_prob(N, n, i) * num_simulation
         y_ions.append((label, seq, mass, count))
 
@@ -58,7 +58,7 @@ def aggregate_by_mass(sequence, N, n):
     for length in range(1, N - 1):
         for i in range(1, N - length):
             seq = sequence[i:i + length]
-            mass = round(sum(AA_MASS[aa] for aa in seq) + 1.00727, 5)
+            mass = round(sum(AA_MASS[aa] for aa in seq) + 1.00727*2, 5)
             probability = internal_frag_prob(N, n, length, i, i + length) * num_simulation
             internal_mass_counts[mass] += probability
             internal_labels_counts[mass].append(f"I{i+1}-{i+length}")
